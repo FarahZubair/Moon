@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moon Animation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: radial-gradient(#020111, #191621);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .moon {
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, #fff 40%, #d9d9d9 60%, #bbb 90%);
+            border-radius: 50%;
+            position: absolute;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.8);
+            animation: moonMove 10s infinite linear, moonGlow 3s infinite alternate;
+        }
+
+        @keyframes moonMove {
+            0% { transform: translateY(20px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(20px); }
+        }
+
+        @keyframes moonGlow {
+            0% { box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); }
+            100% { box-shadow: 0 0 30px rgba(255, 255, 255, 1); }
+        }
+
+        .star {
+            width: 3px;
+            height: 3px;
+            background: white;
+            position: absolute;
+            border-radius: 50%;
+            animation: twinkle 2s infinite alternate;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.3; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1.2); }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="moon"></div>
+
+    <script>
+        function createStars() {
+            const numStars = 100;
+            for (let i = 0; i < numStars; i++) {
+                let star = document.createElement("div");
+                star.classList.add("star");
+                let x = Math.random() * window.innerWidth;
+                let y = Math.random() * window.innerHeight;
+                star.style.left = `${x}px`;
+                star.style.top = `${y}px`;
+                star.style.animationDuration = `${Math.random() * 3 + 2}s`;
+                document.body.appendChild(star);
+            }
+        }
+        createStars();
+    </script>
+</body>
+</html>
